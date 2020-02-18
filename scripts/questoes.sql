@@ -52,7 +52,11 @@ order by quantidade DESC
 
 /* QUESTAO 6 */
 /*Vendedores que mais dão descontos nos seus pedidos*/
-
+select sum(dp.desconto) as desconto, fun.nome from detalhespedido as dp
+join pedidos as ped on dp.númerodopedido=ped.númerodopedido
+join funcionarios as fun on ped.códigodofuncionário = fun.códigodofuncionário
+group by fun.nome
+order by desconto DESC
 
 /* QUESTAO 7 */
 /* Quantidade de clientes existentes por cada país */
@@ -80,16 +84,20 @@ ORDER BY valordevendas DESC;
 
 /* QUESTAO 10 */
 /*  Evolução mensal das vendas no ano de 2017 */
-
 SELECT códigodocliente , SUM(d.preçounitário*d.quantidade)
 FROM pedidos p
 JOIN detalhespedido d ON p.númerodopedido = d.númerodopedido
 WHERE datadopedido BETWEEN '2017-01-01' AND '2017-12-31'
 GROUP BY códigodocliente;
+
 /* QUESTAO 11 */
 /*Tempo médio de entrega (em dias) de cada transportadora no ano de 1997*/
+
 /* QUESTAO 12 */
 /*Distribuição da qtde. de vendedores por país de origem do mesmo*/
+select count(*) as quantidade_vendedores, país from funcionarios
+group by país
+order by quantidade_vendedores DESC
 
 /* QUESTAO 13 */
 /* Cidades que mais consomem (qtde) o produto “Côte de Blaye” */
@@ -100,16 +108,22 @@ JOIN produtos prd ON prd.códigodoproduto=d.códigodoproduto
 WHERE prd.nomedoproduto='Côte de Blaye'
 GROUP BY p.cidadededestino , prd.nomedoproduto
 ORDER BY totalprodutos DESC;
+
 /* QUESTAO 14 */
 /*Tomando como base o principal cliente da Northwind (vendas),Vendedores que participaram nas vendas*/
+
 /* QUESTAO 15 */
 /*Tomando como base o principal cliente da Northwind (vendas),Fornecedores vinculados às vendas */
+
 /* QUESTAO 16 */
 /*Tomando como base o principal cliente da Northwind (vendas),Produtos mais vendidos*/
+
 /* QUESTAO 17 */
 /*Relação contendo cada Categoria, os Produtos mais vendidos nas mesmas e os principais clientes de cada produto.*/
+
 /* QUESTAO 18 */
 /*A relação dos clientes do Brasil , com as seguintes informações: Empresa, Contato, Cidade, Estado, Telefone e Fax*/
+
 /* QUESTAO 19 */
 /*Relação da quantidade de pedidos atendidos por transportadora nos anos de 96, 97 e 98*/
 
