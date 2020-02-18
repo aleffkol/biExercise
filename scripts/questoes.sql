@@ -26,6 +26,32 @@ GROUP BY c.nomedacategoria , p.nomedoproduto
 ORDER BY valordevendas DESC
 LIMIT 10;
 
+/* QUESTAO 3 */
+/*Relação dos produtos mais vendidos para os clientes da Alemanha*/
+select sum(dp.quantidade) as quantidade, pro.nomedoproduto from detalhespedido as dp
+join produtos as pro on (dp.códigodoproduto=pro.códigodoproduto)
+join pedidos as ped on (dp.númerodopedido=ped.númerodopedido)
+join clientes as cli on (ped.códigodocliente=cli.códigodocliente)
+where cli.país = 'Alemanha'
+group by pro.nomedoproduto 
+order by quantidade DESC
+
+/* QUESTAO 4 */
+/*Categoria de produto mais representativa (vendas) nos clientes dos EUA*/
+select sum(dp.quantidade) as quantidade, cat.nomedacategoria as categoria from detalhespedido as dp
+join produtos as pro on (dp.códigodoproduto = pro.códigodoproduto) 
+join categorias as cat on (pro.códigodacategoria=cat.códigodacategoria)
+join pedidos as ped on (dp.númerodopedido = ped.númerodopedido)
+join clientes as cli on (ped.códigodocliente=cli.códigodocliente)
+where cli.país='EUA'
+group by categoria
+order by quantidade DESC
+
+/* QUESTAO 5 */
+/*Relação dos vendedores e o detalhamento das vendas de cada um para os respectivos clientes*/
+
+/* QUESTAO 6 */
+/*Vendedores que mais dão descontos nos seus pedidos*/
 
 
 /* QUESTAO 7 */
@@ -60,6 +86,10 @@ FROM pedidos p
 JOIN detalhespedido d ON p.númerodopedido = d.númerodopedido
 WHERE datadopedido BETWEEN '2017-01-01' AND '2017-12-31'
 GROUP BY códigodocliente;
+/* QUESTAO 11 */
+/*Tempo médio de entrega (em dias) de cada transportadora no ano de 1997*/
+/* QUESTAO 12 */
+/*Distribuição da qtde. de vendedores por país de origem do mesmo*/
 
 /* QUESTAO 13 */
 /* Cidades que mais consomem (qtde) o produto “Côte de Blaye” */
@@ -70,6 +100,18 @@ JOIN produtos prd ON prd.códigodoproduto=d.códigodoproduto
 WHERE prd.nomedoproduto='Côte de Blaye'
 GROUP BY p.cidadededestino , prd.nomedoproduto
 ORDER BY totalprodutos DESC;
+/* QUESTAO 14 */
+/*Tomando como base o principal cliente da Northwind (vendas),Vendedores que participaram nas vendas*/
+/* QUESTAO 15 */
+/*Tomando como base o principal cliente da Northwind (vendas),Fornecedores vinculados às vendas */
+/* QUESTAO 16 */
+/*Tomando como base o principal cliente da Northwind (vendas),Produtos mais vendidos*/
+/* QUESTAO 17 */
+/*Relação contendo cada Categoria, os Produtos mais vendidos nas mesmas e os principais clientes de cada produto.*/
+/* QUESTAO 18 */
+/*A relação dos clientes do Brasil , com as seguintes informações: Empresa, Contato, Cidade, Estado, Telefone e Fax*/
+/* QUESTAO 19 */
+/*Relação da quantidade de pedidos atendidos por transportadora nos anos de 96, 97 e 98*/
 
 
 /* utils */
