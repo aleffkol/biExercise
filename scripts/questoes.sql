@@ -163,6 +163,7 @@ WHERE c.país = 'Brasil'
 
 /* QUESTAO 19 */
 /*Relação da quantidade de pedidos atendidos por transportadora nos anos de 96, 97 e 98*/
+select count(via)
 
 
 /* utils */
