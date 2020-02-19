@@ -94,6 +94,12 @@ limit 10
 
 /* QUESTAO 11 */
 /*Tempo médio de entrega (em dias) de cada transportadora no ano de 1997*/
+/* Está dando erro*/
+select avg(p.datadeentrega) as media_data, trans.nomedaempresa from pedidos as p
+join transportadoras as trans on (p.via=trans.códigodatransportadora)
+WHERE datadopedido BETWEEN '2017-01-01' AND '2017-12-31'
+group by trans.nomedaempresa
+order by media_data DESC
 
 /* QUESTAO 12 */
 /*Distribuição da qtde. de vendedores por país de origem do mesmo*/

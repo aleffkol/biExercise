@@ -16,4 +16,7 @@ add constraint fk_ped_fun foreign key (códigodofuncionário) references funcion
 /*Constraint foreign key (funcionários - supervisor)*/
 alter table funcionarios
 add constraint fk_fun_sup foreign key (supervisor) references funcionarios(códigodofuncionário);
+/*Constraint foreign key (pedidos - transportadoras)*/
+alter table pedidos
+add constraint fk_ped_trans foreign key (via) references transportadoras(códigodatransportadora)
 
