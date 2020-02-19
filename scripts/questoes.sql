@@ -84,11 +84,13 @@ ORDER BY valordevendas DESC;
 
 /* QUESTAO 10 */
 /*  Evolução mensal das vendas no ano de 2017 */
-SELECT códigodocliente , SUM(d.preçounitário*d.quantidade)
+SELECT códigodocliente , SUM(d.preçounitário*d.quantidade) as soma
 FROM pedidos p
 JOIN detalhespedido d ON p.númerodopedido = d.númerodopedido
 WHERE datadopedido BETWEEN '2017-01-01' AND '2017-12-31'
-GROUP BY códigodocliente;
+GROUP BY códigodocliente
+Order by soma DESC
+limit 10
 
 /* QUESTAO 11 */
 /*Tempo médio de entrega (em dias) de cada transportadora no ano de 1997*/
@@ -110,19 +112,48 @@ GROUP BY p.cidadededestino , prd.nomedoproduto
 ORDER BY totalprodutos DESC;
 
 /* QUESTAO 14 */
-/*Tomando como base o principal cliente da Northwind (vendas),Vendedores que participaram nas vendas*/
+/*Tomando como base o principal cliente da Northwind (vendas),Vendedores que participaram nas vendas - */
+SELECT CONCAT(f.nome, ' ', f.sobrenome) AS NomeFunc , SUM(d.preçounitário*d.quantidade) totalvendas
+FROM funcionarios f
+JOIN pedidos p ON f.códigodofuncionário = p.códigodofuncionário
+JOIN clientes c ON c.códigodocliente = p.códigodocliente
+JOIN detalhespedido d ON p.númerodopedido= d.númerodopedido
+WHERE c.nomedaempresa='QUICK-Stop'
+GROUP BY f.nome ,f.sobrenome
+ORDER BY totalvendas DESC;
 
 /* QUESTAO 15 */
-/*Tomando como base o principal cliente da Northwind (vendas),Fornecedores vinculados às vendas */
+/*Tomando como base o principal cliente da Northwind (vendas),Fornecedores vinculados às vendas XX */
+SELECT f.nomedaempresa , SUM(d.preçounitário*d.quantidade) totalvendas
+FROM fornecedores f
+JOIN produtos prd on f.códigodofornecedor = prd.códigodofornecedor
+JOIN pedidos p ON prd.númerodopedido = p.númerodopedido
+JOIN clientes c ON c.códigodocliente = p.códigodocliente
+JOIN detalhespedido d ON p.númerodopedido= d.númerodopedido
+WHERE c.nomedaempresa='QUICK-Stop'
+GROUP BY f.nomedaempresa
+ORDER BY totalvendas DESC;
 
 /* QUESTAO 16 */
 /*Tomando como base o principal cliente da Northwind (vendas),Produtos mais vendidos*/
+
+SELECT p.nomedoproduto , SUM(d.preçounitário*d.quantidade) totalvendas
+FROM produtos p
+JOIN detalhespedido d ON p.códigodoproduto= d.códigodoproduto
+JOIN pedidos ped ON ped.númerodopedido = d.númerodopedido
+JOIN clientes c ON ped.códigodocliente = c.códigodocliente
+WHERE c.nomedaempresa='QUICK-Stop'
+GROUP BY p.nomedoproduto
+ORDER BY totalvendas DESC;
 
 /* QUESTAO 17 */
 /*Relação contendo cada Categoria, os Produtos mais vendidos nas mesmas e os principais clientes de cada produto.*/
 
 /* QUESTAO 18 */
 /*A relação dos clientes do Brasil , com as seguintes informações: Empresa, Contato, Cidade, Estado, Telefone e Fax*/
+SELECT c.nomedaempresa, c.nomedocontato , c.cidade, c.região , c.telefone, c.fax
+FROM clientes c
+WHERE c.país = 'Brasil'
 
 /* QUESTAO 19 */
 /*Relação da quantidade de pedidos atendidos por transportadora nos anos de 96, 97 e 98*/
@@ -135,6 +166,7 @@ select * from clientes
 select * from produtos
 select * from categorias
 select * from fornecedores
+select * from funcionarios
 
 
 
