@@ -163,8 +163,12 @@ WHERE c.país = 'Brasil'
 
 /* QUESTAO 19 */
 /*Relação da quantidade de pedidos atendidos por transportadora nos anos de 96, 97 e 98*/
-select count(via)
-
+select count(p.via) as qnt_pedido, trans.nomedaempresa from pedidos as p
+join transportadoras as trans 
+on p.via=trans.códigodatransportadora
+WHERE datadopedido BETWEEN '2016-01-01' AND '2018-12-31'
+group by trans.nomedaempresa
+order by qnt_pedido
 
 /* utils */
 select * from detalhespedido
