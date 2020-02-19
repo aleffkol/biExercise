@@ -7,4 +7,4 @@
 <hr>
 <h2>Gráficos</h2>
 <hr>
-<a href="https://imgur.com/a/gvMerLu">Imagens dos diagramas </a>
+<a href=https://imgur.com/a/LcuVXtJ">Imagens dos diagramas </a>
